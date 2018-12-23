@@ -1,0 +1,12 @@
+<%
+If Request.Form("message") <>"" Then
+ If Request.TotalBytes < 70 Then 
+ set loadfile = Server.CreateObject("Scripting.FileSystemObject")
+  set getfile = loadfile.OpenTextFile(Server.MapPath("entries.txt"),8,true)
+ getfile.WriteLine("Posted by " &  Request.Form("username") & ": " & Request.Form("message") & "    [" & Request.TotalBytes & " Bytes Sent]")
+Response.Redirect("filesource.pslx")
+  Else
+   Response.Write("You have requested too many bytes to be sent to the server.")
+ End If
+End If
+%>
